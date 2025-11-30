@@ -1,0 +1,110 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// User model for authentication and customer data
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String    @unique
+  password      String
+  role          String    @default("user") // "user" or "admin"
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  orders    Order[]
+  addresses Address[]
+
+  @@map("users")
+}
+
+// Product model for inventory
+model Product {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  slug        String   @unique
+  name        String
+  description String
+  price       Int      // Price in rupees (paise for decimal support)
+  category    String
+  sizes       String[] // Array of available sizes
+  images      String[] // Array of image URLs
+  inStock     Boolean  @default(true)
+  featured    Boolean  @default(false)
+  tags        String[] // For filtering (new, trending, etc.)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  orderItems OrderItem[]
+
+  @@map("products")
+}
+
+// Address model for shipping addresses
+model Address {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String   @db.ObjectId
+  fullName     String
+  phone        String
+  addressLine1 String
+  addressLine2 String?
+  city         String
+  state        String
+  pincode      String
+  isDefault    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orders Order[]
+
+  @@map("addresses")
+}
+
+// Order model for purchase transactions
+model Order {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String   @db.ObjectId
+  orderNumber     String   @unique
+  status          String   @default("pending") // pending, processing, shipped, delivered, cancelled
+  paymentStatus   String   @default("pending") // pending, paid, failed, refunded
+  paymentMethod   String   // upi, card
+  paymentId       String?  // Razorpay payment ID
+  subtotal        Int      // Amount in rupees
+  shipping        Int      // Shipping cost in rupees
+  total           Int      // Total amount in rupees
+  shippingAddress String
+  addressId       String?  @db.ObjectId
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  address   Address?    @relation(fields: [addressId], references: [id], onDelete: SetNull)
+  items     OrderItem[]
+
+  @@map("orders")
+}
+
+// OrderItem model for items in an order
+model OrderItem {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  orderId   String   @db.ObjectId
+  productId String   @db.ObjectId
+  quantity  Int
+  size      String
+  price     Int      // Price at time of purchase
+  createdAt DateTime @default(now())
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("order_items")
+}
