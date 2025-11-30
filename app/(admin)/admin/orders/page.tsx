@@ -366,37 +366,43 @@ export default function OrdersPage() {
               return (
                 <div
                   key={order.id}
-                  className="p-4 space-y-3"
-                  onClick={() => setSelectedOrder(order)}
+                  className="p-4 space-y-3 active:bg-neutral-50 transition-colors"
                 >
                   <div className="flex items-start justify-between">
                     <div>
                       <p className="text-sm font-semibold text-neutral-900">#{order.orderNumber}</p>
                       <p className="text-xs text-neutral-500">{order.user?.name || "Unknown"}</p>
+                      <p className="text-[10px] text-neutral-400 mt-0.5">
+                        {new Date(order.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                      </p>
                     </div>
-                    <p className="text-sm font-bold text-neutral-900">₹{order.total.toLocaleString()}</p>
+                    <p className="text-base font-bold text-neutral-900">₹{order.total.toLocaleString()}</p>
                   </div>
                   <div className="flex items-center gap-2 flex-wrap">
                     <span
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium ${
+                      className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-semibold ${
                         paymentStatusConfig[order.paymentStatus as keyof typeof paymentStatusConfig]?.color || "bg-neutral-100 text-neutral-800"
                       }`}
                     >
-                      <PaymentIcon className="w-2.5 h-2.5" />
+                      <PaymentIcon className="w-3 h-3" />
                       {paymentStatusConfig[order.paymentStatus as keyof typeof paymentStatusConfig]?.label || order.paymentStatus}
                     </span>
                     <span
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium ${
+                      className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-semibold ${
                         statusConfig[order.status as keyof typeof statusConfig]?.color || "bg-neutral-100 text-neutral-800"
                       }`}
                     >
-                      <StatusIcon className="w-2.5 h-2.5" />
+                      <StatusIcon className="w-3 h-3" />
                       {statusConfig[order.status as keyof typeof statusConfig]?.label || order.status}
                     </span>
-                    <span className="text-[10px] text-neutral-500 ml-auto">
-                      {new Date(order.createdAt).toLocaleDateString()}
-                    </span>
                   </div>
+                  <button
+                    onClick={() => setSelectedOrder(order)}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-900 text-white text-sm font-medium rounded-xl hover:bg-neutral-800 active:scale-[0.98] transition-all"
+                  >
+                    <Eye className="w-4 h-4" />
+                    View Details
+                  </button>
                 </div>
               );
             })
