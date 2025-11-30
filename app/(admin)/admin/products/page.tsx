@@ -136,9 +136,82 @@ export default function AdminProductsPage() {
         </select>
       </div>
 
-      {/* Products Table */}
+      {/* Products - Mobile Cards + Desktop Table */}
       <div className="bg-white rounded-lg border border-neutral-200 overflow-hidden">
-        <div className="overflow-x-auto">
+        {/* Mobile Card View */}
+        <div className="md:hidden divide-y divide-neutral-200">
+          {filteredProducts.length === 0 ? (
+            <div className="py-12 text-center px-4">
+              <p className="text-neutral-600">No products found</p>
+              <Button
+                variant="outline"
+                onClick={() => router.push("/admin/products/new")}
+                className="mt-4"
+              >
+                Add your first product
+              </Button>
+            </div>
+          ) : (
+            filteredProducts.map((product) => (
+              <div key={product.id} className="p-4 space-y-3">
+                <div className="flex items-start gap-3">
+                  <div className="relative h-16 w-16 rounded-lg bg-neutral-100 flex-shrink-0 overflow-hidden">
+                    {product.images.length > 0 && product.images[0].startsWith('http') ? (
+                      <img
+                        src={product.images[0]}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-neutral-200 to-neutral-300" />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-neutral-900 truncate">{product.name}</p>
+                    <p className="text-sm font-semibold text-neutral-900 mt-1">₹{product.price.toLocaleString("en-IN")}</p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-neutral-100 text-neutral-800 capitalize">
+                        {product.category}
+                      </span>
+                      {product.inStock ? (
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-green-100 text-green-800">
+                          In Stock
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-red-100 text-red-800">
+                          Out of Stock
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => router.push(`/admin/products/edit/${product.id}`)}
+                    className="flex-1 flex items-center justify-center gap-1 text-xs"
+                  >
+                    <Pencil className="h-3 w-3" />
+                    Edit
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleDelete(product.id, product.name)}
+                    className="flex-1 flex items-center justify-center gap-1 text-xs text-red-600 hover:text-red-700 hover:bg-red-50"
+                  >
+                    <Trash2 className="h-3 w-3" />
+                    Delete
+                  </Button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Desktop Table View */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full">
             <thead className="bg-neutral-50 border-b border-neutral-200">
               <tr>
@@ -235,7 +308,7 @@ export default function AdminProductsPage() {
         </div>
 
         {filteredProducts.length === 0 && (
-          <div className="py-12 text-center">
+          <div className="hidden md:block py-12 text-center">
             <p className="text-neutral-600">No products found</p>
             <Button
               variant="outline"

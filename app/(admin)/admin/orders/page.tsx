@@ -180,119 +180,120 @@ export default function OrdersPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-neutral-900">Orders</h1>
-        <p className="text-neutral-600 mt-1">
+        <h1 className="text-xl sm:text-2xl font-bold text-neutral-900">Orders</h1>
+        <p className="text-sm text-neutral-600 mt-1">
           Manage customer orders and shipments
         </p>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+        <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-neutral-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-neutral-600">Total Orders</p>
-              <p className="text-2xl font-bold text-neutral-900 mt-1">
+              <p className="text-xs sm:text-sm text-neutral-600">Total</p>
+              <p className="text-xl sm:text-2xl font-bold text-neutral-900 mt-1">
                 {stats.total}
               </p>
             </div>
-            <ShoppingBag className="w-6 h-6 text-neutral-600" />
+            <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6 text-neutral-600" />
           </div>
         </div>
 
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
+        <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-neutral-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-neutral-600">Pending</p>
-              <p className="text-2xl font-bold text-yellow-600 mt-1">
+              <p className="text-xs sm:text-sm text-neutral-600">Pending</p>
+              <p className="text-xl sm:text-2xl font-bold text-yellow-600 mt-1">
                 {stats.pending}
               </p>
             </div>
-            <Clock className="w-6 h-6 text-yellow-600" />
+            <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-600" />
           </div>
         </div>
 
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
+        <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-neutral-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-neutral-600">Processing</p>
-              <p className="text-2xl font-bold text-blue-600 mt-1">
+              <p className="text-xs sm:text-sm text-neutral-600">Processing</p>
+              <p className="text-xl sm:text-2xl font-bold text-blue-600 mt-1">
                 {stats.processing}
               </p>
             </div>
-            <Package className="w-6 h-6 text-blue-600" />
+            <Package className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
           </div>
         </div>
 
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
+        <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-neutral-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-neutral-600">Shipped</p>
-              <p className="text-2xl font-bold text-purple-600 mt-1">
+              <p className="text-xs sm:text-sm text-neutral-600">Shipped</p>
+              <p className="text-xl sm:text-2xl font-bold text-purple-600 mt-1">
                 {stats.shipped}
               </p>
             </div>
-            <Truck className="w-6 h-6 text-purple-600" />
+            <Truck className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
           </div>
         </div>
 
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
+        <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-neutral-200 col-span-2 sm:col-span-1">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-neutral-600">Delivered</p>
-              <p className="text-2xl font-bold text-green-600 mt-1">
+              <p className="text-xs sm:text-sm text-neutral-600">Delivered</p>
+              <p className="text-xl sm:text-2xl font-bold text-green-600 mt-1">
                 {stats.delivered}
               </p>
             </div>
-            <CheckCircle className="w-6 h-6 text-green-600" />
+            <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
           </div>
         </div>
       </div>
 
       {/* Payment Status Filter */}
-      <div className="flex items-center gap-4 flex-wrap">
-        <span className="text-sm font-medium text-neutral-700">Payment Status:</span>
+      <div className="space-y-2">
+        <span className="text-xs sm:text-sm font-medium text-neutral-700">Payment Status:</span>
         <div className="flex gap-2 flex-wrap">
           <button
             onClick={() => setPaymentFilter("paid")}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
               paymentFilter === "paid"
                 ? "bg-green-600 text-white"
                 : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
             }`}
           >
-            <CheckCircle className="w-4 h-4 inline mr-1" />
+            <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 inline mr-1" />
             Paid
           </button>
           <button
             onClick={() => setPaymentFilter("pending")}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
               paymentFilter === "pending"
                 ? "bg-orange-600 text-white"
                 : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
             }`}
           >
-            <AlertCircle className="w-4 h-4 inline mr-1" />
-            Pending Payment
+            <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4 inline mr-1" />
+            <span className="hidden sm:inline">Pending Payment</span>
+            <span className="sm:hidden">Pending</span>
           </button>
           <button
             onClick={() => setPaymentFilter("all")}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
               paymentFilter === "all"
                 ? "bg-neutral-900 text-white"
                 : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
             }`}
           >
-            All Orders
+            All
           </button>
         </div>
       </div>
 
       {/* Order Status Filters */}
-      <div className="flex gap-2 flex-wrap">
+      <div className="flex gap-2 flex-wrap overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:overflow-visible">
         <button
           onClick={() => setFilter("all")}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+          className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${
             filter === "all"
               ? "bg-neutral-900 text-white"
               : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
@@ -302,7 +303,7 @@ export default function OrdersPage() {
         </button>
         <button
           onClick={() => setFilter("pending")}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+          className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${
             filter === "pending"
               ? "bg-yellow-600 text-white"
               : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
@@ -312,7 +313,7 @@ export default function OrdersPage() {
         </button>
         <button
           onClick={() => setFilter("processing")}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+          className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${
             filter === "processing"
               ? "bg-blue-600 text-white"
               : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
@@ -322,7 +323,7 @@ export default function OrdersPage() {
         </button>
         <button
           onClick={() => setFilter("shipped")}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+          className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${
             filter === "shipped"
               ? "bg-purple-600 text-white"
               : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
@@ -332,7 +333,7 @@ export default function OrdersPage() {
         </button>
         <button
           onClick={() => setFilter("delivered")}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+          className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${
             filter === "delivered"
               ? "bg-green-600 text-white"
               : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
@@ -342,9 +343,68 @@ export default function OrdersPage() {
         </button>
       </div>
 
-      {/* Orders Table */}
+      {/* Orders - Mobile Cards + Desktop Table */}
       <div className="bg-white rounded-xl shadow-sm border border-neutral-200 overflow-hidden">
-        <div className="overflow-x-auto">
+        {/* Mobile Card View */}
+        <div className="md:hidden divide-y divide-neutral-200">
+          {filteredOrders.length === 0 ? (
+            <div className="px-4 py-12 text-center">
+              <ShoppingBag className="w-12 h-12 text-neutral-400 mx-auto mb-3" />
+              <p className="text-neutral-600">No orders found</p>
+              <p className="text-sm text-neutral-500 mt-1">
+                {paymentFilter === "paid" 
+                  ? "No paid orders yet."
+                  : "Try changing the filter."}
+              </p>
+            </div>
+          ) : (
+            filteredOrders.map((order) => {
+              const StatusIcon =
+                statusConfig[order.status as keyof typeof statusConfig]?.icon || Clock;
+              const PaymentIcon =
+                paymentStatusConfig[order.paymentStatus as keyof typeof paymentStatusConfig]?.icon || AlertCircle;
+              return (
+                <div
+                  key={order.id}
+                  className="p-4 space-y-3"
+                  onClick={() => setSelectedOrder(order)}
+                >
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <p className="text-sm font-semibold text-neutral-900">#{order.orderNumber}</p>
+                      <p className="text-xs text-neutral-500">{order.user?.name || "Unknown"}</p>
+                    </div>
+                    <p className="text-sm font-bold text-neutral-900">₹{order.total.toLocaleString()}</p>
+                  </div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span
+                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium ${
+                        paymentStatusConfig[order.paymentStatus as keyof typeof paymentStatusConfig]?.color || "bg-neutral-100 text-neutral-800"
+                      }`}
+                    >
+                      <PaymentIcon className="w-2.5 h-2.5" />
+                      {paymentStatusConfig[order.paymentStatus as keyof typeof paymentStatusConfig]?.label || order.paymentStatus}
+                    </span>
+                    <span
+                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium ${
+                        statusConfig[order.status as keyof typeof statusConfig]?.color || "bg-neutral-100 text-neutral-800"
+                      }`}
+                    >
+                      <StatusIcon className="w-2.5 h-2.5" />
+                      {statusConfig[order.status as keyof typeof statusConfig]?.label || order.status}
+                    </span>
+                    <span className="text-[10px] text-neutral-500 ml-auto">
+                      {new Date(order.createdAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
+
+        {/* Desktop Table View */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full">
             <thead className="bg-neutral-50 border-b border-neutral-200">
               <tr>
@@ -477,26 +537,26 @@ export default function OrdersPage() {
       {/* Order Details Modal */}
       {selectedOrder && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-neutral-200">
+          <div className="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto mx-2 sm:mx-auto">
+            <div className="p-4 sm:p-6 border-b border-neutral-200 sticky top-0 bg-white z-10">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-neutral-900">
+                <h2 className="text-lg sm:text-xl font-bold text-neutral-900">
                   Order #{selectedOrder.orderNumber}
                 </h2>
                 <button
                   onClick={() => setSelectedOrder(null)}
-                  className="text-neutral-500 hover:text-neutral-700"
+                  className="text-neutral-500 hover:text-neutral-700 p-1"
                 >
-                  <XCircle className="w-6 h-6" />
+                  <XCircle className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
               </div>
             </div>
 
-            <div className="p-6 space-y-6">
+            <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
               {/* Payment & Status Info */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-1.5 sm:mb-2">
                     Order Status
                   </label>
                   <select
@@ -504,7 +564,7 @@ export default function OrdersPage() {
                     onChange={(e) =>
                       updateOrderStatus(selectedOrder.id, e.target.value)
                     }
-                    className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 text-sm border border-neutral-300 rounded-lg focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
                   >
                     <option value="pending">Pending</option>
                     <option value="processing">Processing</option>
@@ -514,10 +574,10 @@ export default function OrdersPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-1.5 sm:mb-2">
                     Payment Status
                   </label>
-                  <div className={`px-4 py-2 rounded-lg text-sm font-medium ${
+                  <div className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium ${
                     paymentStatusConfig[selectedOrder.paymentStatus as keyof typeof paymentStatusConfig]?.color || "bg-neutral-100"
                   }`}>
                     {paymentStatusConfig[selectedOrder.paymentStatus as keyof typeof paymentStatusConfig]?.label || selectedOrder.paymentStatus}
@@ -526,49 +586,49 @@ export default function OrdersPage() {
               </div>
 
               {/* Payment Method */}
-              <div className="bg-neutral-50 rounded-lg p-4 flex items-center gap-3">
-                <CreditCard className="w-5 h-5 text-neutral-600" />
+              <div className="bg-neutral-50 rounded-lg p-3 sm:p-4 flex items-center gap-3">
+                <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-600 flex-shrink-0" />
                 <div>
-                  <p className="text-sm font-medium text-neutral-900">Payment Method</p>
-                  <p className="text-sm text-neutral-600 capitalize">{selectedOrder.paymentMethod || "Not specified"}</p>
+                  <p className="text-xs sm:text-sm font-medium text-neutral-900">Payment Method</p>
+                  <p className="text-xs sm:text-sm text-neutral-600 capitalize">{selectedOrder.paymentMethod || "Not specified"}</p>
                 </div>
               </div>
 
               {/* Customer Info */}
               <div>
-                <h3 className="font-semibold text-neutral-900 mb-3">
+                <h3 className="text-sm sm:text-base font-semibold text-neutral-900 mb-2 sm:mb-3">
                   Customer Information
                 </h3>
-                <div className="bg-neutral-50 rounded-lg p-4 space-y-2">
-                  <p className="text-sm">
+                <div className="bg-neutral-50 rounded-lg p-3 sm:p-4 space-y-1.5 sm:space-y-2">
+                  <p className="text-xs sm:text-sm">
                     <span className="text-neutral-600">Name:</span>{" "}
                     <span className="font-medium">{selectedOrder.user.name}</span>
                   </p>
-                  <p className="text-sm">
+                  <p className="text-xs sm:text-sm">
                     <span className="text-neutral-600">Email:</span>{" "}
-                    <span className="font-medium">{selectedOrder.user.email}</span>
+                    <span className="font-medium break-all">{selectedOrder.user.email}</span>
                   </p>
                 </div>
               </div>
 
               {/* Shipping Address */}
               <div>
-                <h3 className="font-semibold text-neutral-900 mb-3">
+                <h3 className="text-sm sm:text-base font-semibold text-neutral-900 mb-2 sm:mb-3">
                   Shipping Address
                 </h3>
                 {selectedOrder.address ? (
-                  <div className="bg-neutral-50 rounded-lg p-4 space-y-1">
-                    <p className="text-sm font-medium">
+                  <div className="bg-neutral-50 rounded-lg p-3 sm:p-4 space-y-1">
+                    <p className="text-xs sm:text-sm font-medium">
                       {selectedOrder.address.fullName}
                     </p>
-                    <p className="text-sm text-neutral-600">
+                    <p className="text-xs sm:text-sm text-neutral-600">
                       {selectedOrder.address.phone}
                     </p>
-                    <p className="text-sm text-neutral-600">
+                    <p className="text-xs sm:text-sm text-neutral-600">
                       {selectedOrder.address.addressLine1}
                     </p>
                     {selectedOrder.address.addressLine2 && (
-                      <p className="text-sm text-neutral-600">
+                      <p className="text-xs sm:text-sm text-neutral-600">
                         {selectedOrder.address.addressLine2}
                       </p>
                     )}
