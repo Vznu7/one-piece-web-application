@@ -346,7 +346,7 @@ export default function OrdersPage() {
       {/* Orders - Mobile Cards + Desktop Table */}
       <div className="bg-white rounded-xl shadow-sm border border-neutral-200 overflow-hidden">
         {/* Mobile Card View */}
-        <div className="md:hidden divide-y divide-neutral-200">
+        <div className="lg:hidden divide-y divide-neutral-200">
           {filteredOrders.length === 0 ? (
             <div className="px-4 py-12 text-center">
               <ShoppingBag className="w-12 h-12 text-neutral-400 mx-auto mb-3" />
@@ -404,7 +404,7 @@ export default function OrdersPage() {
         </div>
 
         {/* Desktop Table View */}
-        <div className="hidden md:block overflow-x-auto">
+        <div className="hidden lg:block overflow-x-auto">
           <table className="w-full">
             <thead className="bg-neutral-50 border-b border-neutral-200">
               <tr>

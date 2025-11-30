@@ -39,7 +39,7 @@ export function AdminSidebar() {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden fixed top-3 left-3 z-50 p-2 rounded-lg bg-neutral-950 text-white shadow-lg"
+        className="lg:hidden fixed top-3 left-3 z-50 p-2 rounded-lg bg-neutral-950 text-white shadow-lg"
         aria-label={isOpen ? "Close menu" : "Open menu"}
       >
         {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -48,15 +48,15 @@ export function AdminSidebar() {
       {/* Overlay */}
       {isOpen && (
         <div
-          className="md:hidden fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
+          className="lg:hidden fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed md:static inset-y-0 left-0 z-40 w-60 flex flex-col border-r border-neutral-200 bg-neutral-950 text-neutral-100 transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        className={`fixed lg:static inset-y-0 left-0 z-40 w-60 flex flex-col border-r border-neutral-200 bg-neutral-950 text-neutral-100 transition-transform duration-300 ease-in-out ${
+          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
         <div className="h-14 sm:h-16 flex items-center px-4 border-b border-neutral-800">
